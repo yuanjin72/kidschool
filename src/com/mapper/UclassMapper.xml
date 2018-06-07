@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.dao.UclassMapper">
+  <resultMap id="BaseResultMap" type="com.po.Uclass">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="uclass" jdbcType="VARCHAR" property="uclass" />
+    <result column="teach" jdbcType="VARCHAR" property="teach" />
+    <result column="headteacher" jdbcType="VARCHAR" property="headteacher" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, uclass, teach, headteacher
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from uclass
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from uclass
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.po.Uclass">
+    insert into uclass (id, uclass, teach, 
+      headteacher)
+    values (#{id,jdbcType=INTEGER}, #{uclass,jdbcType=VARCHAR}, #{teach,jdbcType=VARCHAR}, 
+      #{headteacher,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.po.Uclass">
+    insert into uclass
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="uclass != null">
+        uclass,
+      </if>
+      <if test="teach != null">
+        teach,
+      </if>
+      <if test="headteacher != null">
+        headteacher,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="uclass != null">
+        #{uclass,jdbcType=VARCHAR},
+      </if>
+      <if test="teach != null">
+        #{teach,jdbcType=VARCHAR},
+      </if>
+      <if test="headteacher != null">
+        #{headteacher,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.po.Uclass">
+    update uclass
+    <set>
+      <if test="uclass != null">
+        uclass = #{uclass,jdbcType=VARCHAR},
+      </if>
+      <if test="teach != null">
+        teach = #{teach,jdbcType=VARCHAR},
+      </if>
+      <if test="headteacher != null">
+        headteacher = #{headteacher,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.po.Uclass">
+    update uclass
+    set uclass = #{uclass,jdbcType=VARCHAR},
+      teach = #{teach,jdbcType=VARCHAR},
+      headteacher = #{headteacher,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>
